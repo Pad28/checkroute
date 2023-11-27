@@ -7,8 +7,10 @@ import { valid } from "./middlewares/validar_campos";
 import { emitWarning } from "process";
 import { consUnidades, consultarIdUnidades, consultarUnidades, delUnidad, newUnidad, updUnidad } from "./unidades";
 import { consMulta, delMulta, newMulta, updMulta } from "./multas";
+import cors from 'cors';
 const SS = express();
 SS.use(express.json());
+SS.use(cors());
 //###################---EMPLEADOS---#########################
 //Consultar Empleados
 SS.get(`/api/empleados/consultarEmpleados`, 

@@ -20,8 +20,10 @@ const empleados_1 = require("./empleados");
 const validar_campos_1 = require("./middlewares/validar_campos");
 const unidades_1 = require("./unidades");
 const multas_1 = require("./multas");
+const cors_1 = __importDefault(require("cors"));
 const SS = (0, express_1.default)();
 SS.use(express_1.default.json());
+SS.use((0, cors_1.default)());
 //###################---EMPLEADOS---#########################
 //Consultar Empleados
 SS.get(`/api/empleados/consultarEmpleados`, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -114,6 +116,18 @@ SS.get(`/api/unidades/consultarUnidades`, (req, res) => __awaiter(void 0, void 0
     console.log("miguepenudo");
     try {
         const body = yield (0, unidades_1.consUnidades)();
+        res.status(200).json(body);
+    }
+    catch (a) {
+        console.log(`Algo salio mal con la inserción de la unidad ${a}`);
+        res.status(400).json({ mensaje: `Algo salio mal con el registro ${a}` });
+    }
+}));
+//Consultar idunidades
+SS.get(`/api/unidades/consultarIdUnidades`, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("miguepenudo");
+    try {
+        const body = yield (0, unidades_1.consultarUnidades)();
         res.status(200).json(body);
     }
     catch (a) {

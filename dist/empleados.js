@@ -26,7 +26,10 @@ const newUser = (usuario, contraseña) => __awaiter(void 0, void 0, void 0, func
 });
 exports.newUser = newUser;
 const newUserCh = (usuario, contraseña, chofer) => __awaiter(void 0, void 0, void 0, function* () {
-    const row = yield exports.pool.query(`insert into unidades (usuario, contrasena) values('${usuario}','${contraseña}') where nombreChofer ='${chofer}'`);
+    const row = yield exports.pool.query(`update unidades 
+    set usuario = '${usuario}', 
+        contrasena = '${contraseña}'
+        where nombreChofer = '${chofer}';`);
     return row;
 });
 exports.newUserCh = newUserCh;

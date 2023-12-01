@@ -14,7 +14,10 @@ export const newUser = async(usuario: string, contraseña: string) => {
 }
 
 export const newUserCh = async(usuario: string, contraseña: string, chofer: string) => {
-    const row = await pool.query(`insert into unidades (usuario, contrasena) values('${usuario}','${contraseña}') where nombreChofer ='${chofer}'`)
+    const row = await pool.query(`update unidades 
+    set usuario = '${usuario}', 
+        contrasena = '${contraseña}'
+        where nombreChofer = '${chofer}';`)
     return row;
 }
 

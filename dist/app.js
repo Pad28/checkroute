@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const cors_1 = __importDefault(require("cors"));
 const express_validator_1 = require("express-validator");
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
@@ -22,6 +23,7 @@ const unidades_1 = require("./unidades");
 const multas_1 = require("./multas");
 const SS = (0, express_1.default)();
 SS.use(express_1.default.json());
+SS.use((0, cors_1.default)());
 //###################---EMPLEADOS---#########################
 //Consultar Empleados
 SS.get(`/api/empleados/consultarEmpleados`, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -51,7 +53,25 @@ SS.post(`/api/empleados/crearUsuario`, [
         res.status(400).json({ mensaje: `Algo salio mal con el registro ${a}` });
     }
 }));
-//Autenticacion
+// Insertar Usuario Chofer
+SS.post(`/api/empleados/crearCh`, [
+    (0, express_validator_1.check)("usuario").not().isEmpty(),
+    (0, express_validator_1.check)("contasena").not().isEmpty(),
+    validar_campos_1.valid
+], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const user = req.body.usuario;
+    const password = req.body.contrasena;
+    const chofer = req.body.nombreChofer;
+    try {
+        yield (0, empleados_1.newUserCh)(user, password, chofer);
+        res.status(200).json({ mensaje: "Chofer registrado correctamente" });
+    }
+    catch (a) {
+        console.log(`Algo salio mal con la autenticacion ${a}`);
+        res.status(400).json({ mensaje: `Algo salio mal con el registro ${a}` });
+    }
+}));
+//AutenticacionAdmins
 SS.post(`/api/empleados/autenticacion`, [
     (0, express_validator_1.check)("usuario").not().isEmpty(),
     (0, express_validator_1.check)("password").not().isEmpty(),
@@ -66,6 +86,27 @@ SS.post(`/api/empleados/autenticacion`, [
             return;
         }
         res.status(200).json({ mensaje: "Usuario validado correctamente" });
+    }
+    catch (a) {
+        console.log(`Algo salio mal con la autenticacion ${a}`);
+        res.status(400).json({ mensaje: `Algo salio mal con el registro ${a}` });
+    }
+}));
+//AutenticacionChofer
+SS.post(`/api/empleados/autenticacionChofer`, [
+    (0, express_validator_1.check)("usuario").not().isEmpty(),
+    (0, express_validator_1.check)("contrasena").not().isEmpty(),
+    validar_campos_1.valid
+], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const body = req.body;
+    try {
+        const a = yield (0, empleados_1.authUserC)(body.usuario, body.contrasena);
+        console.log(a.length);
+        if (a.length === 0) {
+            res.status(400).json({ mensaje: "Usuario no encontrado" });
+            return;
+        }
+        res.status(200).json({ mensaje: "Chofer validado correctamente" });
     }
     catch (a) {
         console.log(`Algo salio mal con la autenticacion ${a}`);
@@ -114,6 +155,28 @@ SS.get(`/api/unidades/consultarUnidades`, (req, res) => __awaiter(void 0, void 0
     console.log("miguepenudo");
     try {
         const body = yield (0, unidades_1.consUnidades)();
+        res.status(200).json(body);
+    }
+    catch (a) {
+        console.log(`Algo salio mal con la inserción de la unidad ${a}`);
+        res.status(400).json({ mensaje: `Algo salio mal con el registro ${a}` });
+    }
+}));
+//Consultar idunidades
+SS.get(`/api/unidades/consultarIdUnidades`, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const body = yield (0, unidades_1.consultarUnidades)();
+        res.status(200).json(body);
+    }
+    catch (a) {
+        console.log(`Algo salio mal con la inserción de la unidad ${a}`);
+        res.status(400).json({ mensaje: `Algo salio mal con el registro ${a}` });
+    }
+}));
+//Consultar nombreChofer
+SS.get(`/api/unidades/consultarNombreUnidades`, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const body = yield (0, unidades_1.consChoferes)();
         res.status(200).json(body);
     }
     catch (a) {
@@ -225,5 +288,5 @@ SS.post("/api/multas/eliminarMulta", (req, res) => __awaiter(void 0, void 0, voi
     }
 }));
 SS.listen(12345, () => {
-    console.log("Server escuchando...");
+    console.log("Server escuchando... $$");
 });

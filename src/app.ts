@@ -47,8 +47,8 @@ SS.post(`/api/empleados/crearUsuario`, [
 
 })
 
-// Insertar Usuario 
-SS.post(`/api/empleados/crearUsuarioChofer`, [
+// Insertar Usuario Chofer
+SS.post(`/api/empleados/crearCh`, [
     check("usuario").not().isEmpty(),
     check("contasena").not().isEmpty(),
     valid
@@ -328,7 +328,7 @@ async (req: Request, res: Response) => {
 });
 
 SS.listen(12345, () => {
-    console.log("Server escuchando...");
+    console.log("Server escuchando... $$");
 
 });
 

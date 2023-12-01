@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.consultarIdUnidades = exports.consUnidades = exports.delUnidad = exports.updUnidad = exports.newUnidad = void 0;
+exports.consultarUnidades = exports.consultarIdUnidades = exports.consChoferes = exports.consUnidades = exports.delUnidad = exports.updUnidad = exports.newUnidad = void 0;
 const empleados_1 = require("./empleados");
 const newUnidad = (id, nombreEmpleado, estado) => __awaiter(void 0, void 0, void 0, function* () {
     const row = yield empleados_1.pool.query(`insert into unidades(idUnidad, nombreChofer, estado) values(${id},'${nombreEmpleado}', '${estado}')`);
@@ -32,8 +32,18 @@ const consUnidades = () => __awaiter(void 0, void 0, void 0, function* () {
     return row;
 });
 exports.consUnidades = consUnidades;
+const consChoferes = () => __awaiter(void 0, void 0, void 0, function* () {
+    const [row] = yield empleados_1.pool.query(`select nombreChofer from unidades; `);
+    return row;
+});
+exports.consChoferes = consChoferes;
 const consultarIdUnidades = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const [row] = yield empleados_1.pool.query(`select idUnidad from unidades where idUnidad = ${id};`);
     return row;
 });
 exports.consultarIdUnidades = consultarIdUnidades;
+const consultarUnidades = () => __awaiter(void 0, void 0, void 0, function* () {
+    const [row] = yield empleados_1.pool.query(`select idUnidad from unidades;`);
+    return row;
+});
+exports.consultarUnidades = consultarUnidades;

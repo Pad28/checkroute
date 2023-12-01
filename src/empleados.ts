@@ -19,6 +19,12 @@ export const authUser = async(usuario: string, contraseña: string) => {
     return row;
 }
 
+export const authUserC = async(usuario: string, contraseña: string) => {
+    const [ row ] = await pool.query(`select *from unidades where usuario = '${usuario}' and contrasena = '${contraseña}';`)
+    
+    return row;
+}
+
 export const consUser = async() => {
     const [ row ] = await pool.query(`select *from empleados;`)
     

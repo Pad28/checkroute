@@ -1,13 +1,13 @@
 import express, { Application, Request, Response } from "express";
+import cors from "cors";
 import { check } from "express-validator";
 import dotenv from "dotenv";
 dotenv.config();
-import { authUser, consUser, delEmpleado, newUser, updPass } from "./empleados";
+import { authUser, authUserC, consUser, delEmpleado, newUser, updPass } from "./empleados";
 import { valid } from "./middlewares/validar_campos";
 import { emitWarning } from "process";
 import { consUnidades, consultarIdUnidades, consultarUnidades, delUnidad, newUnidad, updUnidad } from "./unidades";
 import { consMulta, delMulta, newMulta, updMulta } from "./multas";
-import cors from 'cors';
 const SS = express();
 SS.use(express.json());
 SS.use(cors());
@@ -46,7 +46,7 @@ SS.post(`/api/empleados/crearUsuario`, [
     }
 
 })
-//Autenticacion
+//AutenticacionAdmins
 SS.post(`/api/empleados/autenticacion`, [
     check("usuario").not().isEmpty(),
     check("password").not().isEmpty(),
@@ -65,6 +65,33 @@ SS.post(`/api/empleados/autenticacion`, [
             return
         } 
         res.status(200).json({mensaje: "Usuario validado correctamente"})
+    }catch(a){
+        console.log(`Algo salio mal con la autenticacion ${a}`);
+        res.status(400).json({mensaje:`Algo salio mal con el registro ${a}`})
+
+    }
+}
+)
+
+//AutenticacionChofer
+SS.post(`/api/empleados/autenticacionChofer`, [
+    check("usuario").not().isEmpty(),
+    check("contrasena").not().isEmpty(),
+    valid
+], async (req: Request, res: Response) => {
+    const body = req.body;
+
+    
+    try{
+        const a = await authUserC(body.usuario, body.contrasena) as Array<{}>;
+        console.log(a.length);
+        
+        if(a.length === 0){
+            res.status(400).json({mensaje: "Usuario no encontrado"})
+            
+            return
+        } 
+        res.status(200).json({mensaje: "Chofer validado correctamente"})
     }catch(a){
         console.log(`Algo salio mal con la autenticacion ${a}`);
         res.status(400).json({mensaje:`Algo salio mal con el registro ${a}`})

@@ -3,10 +3,10 @@ import cors from "cors";
 import { check } from "express-validator";
 import dotenv from "dotenv";
 dotenv.config();
-import { authUser, authUserC, consUser, delEmpleado, newUser, updPass } from "./empleados";
+import { authUser, authUserC, consUser, delEmpleado, newUser, newUserCh, updPass } from "./empleados";
 import { valid } from "./middlewares/validar_campos";
 import { emitWarning } from "process";
-import { consUnidades, consultarIdUnidades, consultarUnidades, delUnidad, newUnidad, updUnidad } from "./unidades";
+import { consChoferes, consUnidades, consultarIdUnidades, consultarUnidades, delUnidad, newUnidad, updUnidad } from "./unidades";
 import { consMulta, delMulta, newMulta, updMulta } from "./multas";
 const SS = express();
 SS.use(express.json());
@@ -46,6 +46,28 @@ SS.post(`/api/empleados/crearUsuario`, [
     }
 
 })
+
+// Insertar Usuario 
+SS.post(`/api/empleados/crearUsuarioChofer`, [
+    check("usuario").not().isEmpty(),
+    check("contasena").not().isEmpty(),
+    valid
+], async (req: Request, res: Response) => {
+    const user = req.body.usuario;
+    const password = req.body.contrasena;
+    const chofer = req.body.nombreChofer;
+
+    try {
+        await newUserCh(user, password, chofer);
+        res.status(200).json({ mensaje: "Chofer registrado correctamente" })
+    } catch (a) {
+        console.log(`Algo salio mal con la autenticacion ${a}`);
+        res.status(400).json({mensaje:`Algo salio mal con el registro ${a}`})
+
+    }
+
+})
+
 //AutenticacionAdmins
 SS.post(`/api/empleados/autenticacion`, [
     check("usuario").not().isEmpty(),
@@ -161,10 +183,25 @@ SS.get(`/api/unidades/consultarUnidades`,
 //Consultar idunidades
 SS.get(`/api/unidades/consultarIdUnidades`, 
     async (req: Request, res: Response) => {
-    console.log("miguepenudo");
+    
 
     try{
         const body = await consultarUnidades();
+        res.status(200).json(body);
+    }catch(a){
+        console.log(`Algo salio mal con la inserción de la unidad ${a}`);
+        res.status(400).json({mensaje:`Algo salio mal con el registro ${a}`})
+
+    }
+})
+
+//Consultar nombreChofer
+SS.get(`/api/unidades/consultarNombreUnidades`, 
+    async (req: Request, res: Response) => {
+   
+
+    try{
+        const body = await consChoferes();
         res.status(200).json(body);
     }catch(a){
         console.log(`Algo salio mal con la inserción de la unidad ${a}`);

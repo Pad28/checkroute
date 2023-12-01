@@ -22,6 +22,12 @@ export const consUnidades = async () => {
     return row;
 }
 
+export const consChoferes = async () => {
+    const [row] = await pool.query(`select nombreChofer from unidades; `)
+    return row;
+}
+
+
 export const consultarIdUnidades = async (id:number) => {
     const [row] = await pool.query(`select idUnidad from unidades where idUnidad = ${id};`)
     return row;

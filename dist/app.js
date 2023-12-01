@@ -56,7 +56,7 @@ SS.post(`/api/empleados/crearUsuario`, [
 // Insertar Usuario Chofer
 SS.post(`/api/empleados/crearCh`, [
     (0, express_validator_1.check)("usuario").not().isEmpty(),
-    (0, express_validator_1.check)("contasena").not().isEmpty(),
+    (0, express_validator_1.check)("contrasena").not().isEmpty(),
     validar_campos_1.valid
 ], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const user = req.body.usuario;

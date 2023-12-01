@@ -50,7 +50,7 @@ SS.post(`/api/empleados/crearUsuario`, [
 // Insertar Usuario Chofer
 SS.post(`/api/empleados/crearCh`, [
     check("usuario").not().isEmpty(),
-    check("contasena").not().isEmpty(),
+    check("contrasena").not().isEmpty(),
     valid
 ], async (req: Request, res: Response) => {
     const user = req.body.usuario;

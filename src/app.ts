@@ -109,11 +109,11 @@ SS.post(`/api/empleados/autenticacionChofer`, [
         console.log(a.length);
         
         if(a.length === 0){
-            res.status(400).json({mensaje: "Usuario no encontrado"})
+            res.status(400).json({mensaje2: "Usuario no encontrado"})
             
             return
         } 
-        res.status(200).json({mensaje: "Chofer validado correctamente"})
+        res.status(200).json({mensaje2: "Chofer validado correctamente"})
     }catch(a){
         console.log(`Algo salio mal con la autenticacion ${a}`);
         res.status(400).json({mensaje:`Algo salio mal con el registro ${a}`})

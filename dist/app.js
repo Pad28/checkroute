@@ -193,7 +193,7 @@ SS.post(`/api/unidades/insertarUnidad`, [
 ], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const body = req.body;
     try {
-        yield (0, unidades_1.newUnidad)(body.idUnidad, body.nombreChofer, body.estado);
+        yield (0, unidades_1.newUnidad)(body.idUnidad, body.nombreChofer, body.estado, body.usuario, body.contrasena);
         res.status(200).json({ mensaje: "Unidad insertada correctamente;" });
     }
     catch (a) {

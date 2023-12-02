@@ -11,8 +11,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.consultarUnidades = exports.consultarIdUnidades = exports.consChoferes = exports.consUnidades = exports.delUnidad = exports.updUnidad = exports.newUnidad = void 0;
 const empleados_1 = require("./empleados");
-const newUnidad = (id, nombreEmpleado, estado) => __awaiter(void 0, void 0, void 0, function* () {
-    const row = yield empleados_1.pool.query(`insert into unidades(idUnidad, nombreChofer, estado) values(${id},'${nombreEmpleado}', '${estado}')`);
+const newUnidad = (id, nombreEmpleado, estado, user, password) => __awaiter(void 0, void 0, void 0, function* () {
+    const row = yield empleados_1.pool.query(`insert into unidades(idUnidad, nombreChofer, estado, usuario, contrasena) values(${id},'${nombreEmpleado}', '${estado}', '${user}', '${password}')`);
     return row;
 });
 exports.newUnidad = newUnidad;

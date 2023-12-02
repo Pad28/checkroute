@@ -1,8 +1,8 @@
 import mysql from "mysql2";
 import { pool } from "./empleados";
 
-export const newUnidad = async (id:number, nombreEmpleado:string, estado:string) => {
-    const row = await pool.query(`insert into unidades(idUnidad, nombreChofer, estado) values(${id},'${nombreEmpleado}', '${estado}')`)
+export const newUnidad = async (id:number, nombreEmpleado:string, estado:string, user:string, password:string) => {
+    const row = await pool.query(`insert into unidades(idUnidad, nombreChofer, estado, usuario, contrasena) values(${id},'${nombreEmpleado}', '${estado}', '${user}', '${password}')`)
     return row;
 }
 

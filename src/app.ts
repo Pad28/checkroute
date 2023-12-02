@@ -220,7 +220,7 @@ SS.post(`/api/unidades/insertarUnidad`, [
     const body = req.body;
 
     try{
-        await newUnidad(body.idUnidad, body.nombreChofer, body.estado);
+        await newUnidad(body.idUnidad, body.nombreChofer, body.estado, body.usuario, body.contrasena);
         res.status(200).json({mensaje: "Unidad insertada correctamente;"})
     }catch(a){
         console.log(`Algo salio mal con la inserción de la unidad ${a}`);

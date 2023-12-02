@@ -224,17 +224,12 @@ SS.post(`/api/unidades/actualizarUnidad`, [
     }
 }));
 //Eliminar unidad
-SS.post(`/api/unidades/eliminarUnidad`, [
-    (0, express_validator_1.check)("idUnidad").not().isEmpty(),
-    (0, express_validator_1.check)("nombreChofer").not().isEmpty(),
-    (0, express_validator_1.check)("estado").not().isEmpty(),
-    validar_campos_1.valid
-], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+SS.post(`/api/unidades/eliminarUnidad`, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const body = req.body;
     const validar = yield (0, unidades_1.delUnidad)(body.idUnidad);
     try {
-        yield (0, unidades_1.updUnidad)(body.idUnidad, body.nombreChofer, body.estado);
-        res.status(200).json({ mensaje: `Unidad actualizada correctamente` });
+        yield (0, unidades_1.delUnidad)(body.idUnidad);
+        res.status(200).json({ mensaje: `Unidad eliminada correctamente` });
     }
     catch (a) {
         console.log(`Algo salio mal con la eliminación de la unidad ${a}`);

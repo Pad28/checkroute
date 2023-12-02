@@ -255,17 +255,12 @@ SS.post(`/api/unidades/actualizarUnidad`, [
 })
 
 //Eliminar unidad
-SS.post(`/api/unidades/eliminarUnidad`, [
-    check("idUnidad").not().isEmpty(),
-    check("nombreChofer").not().isEmpty(),
-    check("estado").not().isEmpty(),
-    valid
-], async (req: Request, res: Response) => {
+SS.post(`/api/unidades/eliminarUnidad`,  async (req: Request, res: Response) => {
     const body = req.body;
     const validar = await delUnidad(body.idUnidad) as Array<{}>;
     try{
-        await updUnidad(body.idUnidad, body.nombreChofer, body.estado);
-        res.status(200).json({mensaje:`Unidad actualizada correctamente`})
+        await delUnidad(body.idUnidad);
+        res.status(200).json({mensaje:`Unidad eliminada correctamente`})
     }catch(a){
         console.log(`Algo salio mal con la eliminación de la unidad ${a}`);
         res.status(400).json({mensaje:`Algo salio mal el delete ${a}`})

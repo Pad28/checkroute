@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.consMulta = exports.delMulta = exports.updMulta = exports.newMulta = void 0;
+exports.consMultaPend = exports.delMulta = exports.updMulta = exports.newMulta = void 0;
 const empleados_1 = require("./empleados");
 const newMulta = (unidad) => __awaiter(void 0, void 0, void 0, function* () {
     const row = yield empleados_1.pool.query(`call insertarMulta(${unidad});`);
@@ -26,8 +26,8 @@ const delMulta = (id) => __awaiter(void 0, void 0, void 0, function* () {
     return row;
 });
 exports.delMulta = delMulta;
-const consMulta = () => __awaiter(void 0, void 0, void 0, function* () {
-    const [row] = yield empleados_1.pool.query(`select *from multas;`);
+const consMultaPend = () => __awaiter(void 0, void 0, void 0, function* () {
+    const [row] = yield empleados_1.pool.query(`select *from multas where estadoMulta = 'Pendiente';`);
     return row;
 });
-exports.consMulta = consMulta;
+exports.consMultaPend = consMultaPend;

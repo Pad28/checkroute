@@ -7,7 +7,7 @@ import { authUser, authUserC, consUser, delEmpleado, newUser, newUserCh, updPass
 import { valid } from "./middlewares/validar_campos";
 import { emitWarning } from "process";
 import { consChoferes, consUnidades, consultarIdUnidades, consultarUnidades, delUnidad, newUnidad, updUnidad } from "./unidades";
-import { consMulta, delMulta, newMulta, updMulta } from "./multas";
+import { consMultaPend, delMulta, newMulta, updMulta } from "./multas";
 const SS = express();
 SS.use(express.json());
 SS.use(cors());
@@ -263,7 +263,7 @@ SS.post(`/api/unidades/eliminarUnidad`,  async (req: Request, res: Response) => 
         res.status(200).json({mensaje:`Unidad eliminada correctamente`})
     }catch(a){
         console.log(`Algo salio mal con la eliminación de la unidad ${a}`);
-        res.status(400).json({mensaje:`Algo salio mal el delete ${a}`})
+        res.status(400).json({mensaje:`Algo salio mal al eliminar el chofer ${a}`})
 
     }
 })
@@ -275,7 +275,7 @@ SS.get(`/api/multas/consultarMultas`,
     async (req: Request, res: Response) => {
 
     try{
-        const body = await consMulta();
+        const body = await consMultaPend();
         res.status(200).json(body);
     }catch(a){
         console.log(`Algo salio mal con la consulta de multasd ${a}`);

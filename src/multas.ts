@@ -16,8 +16,8 @@ export const delMulta = async (id:number) => {
     return row;
 }
 
-export const consMulta = async () => {
-    const [row] = await pool.query(`select *from multas;`);
+export const consMultaPend = async () => {
+    const [row] = await pool.query(`select *from multas where estadoMulta = 'Pendiente';`);
     return row;
 }
 

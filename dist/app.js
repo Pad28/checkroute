@@ -233,14 +233,14 @@ SS.post(`/api/unidades/eliminarUnidad`, (req, res) => __awaiter(void 0, void 0, 
     }
     catch (a) {
         console.log(`Algo salio mal con la eliminación de la unidad ${a}`);
-        res.status(400).json({ mensaje: `Algo salio mal el delete ${a}` });
+        res.status(400).json({ mensaje: `Algo salio mal al eliminar el chofer ${a}` });
     }
 }));
 //###################---MULTAS---########################
 //Consultar Multas
 SS.get(`/api/multas/consultarMultas`, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const body = yield (0, multas_1.consMulta)();
+        const body = yield (0, multas_1.consMultaPend)();
         res.status(200).json(body);
     }
     catch (a) {

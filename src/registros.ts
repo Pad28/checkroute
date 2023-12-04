@@ -27,7 +27,8 @@ export const consAllRegistro = async () => {
 }
 
 export const consRegistro = async () => {
-    const [row] = await pool.query(`select idUnidad, horaSalida, horaLlegada from registros where DATE(horaSalida) =  CURDATE();`);
+    const [row] = await pool.query(`SELECT idUnidad, DATE_FORMAT(horaSalida, '%H:%i') AS horaSalida, DATE_FORMAT(horaLlegada, '%H:%i') AS horaLlegada
+    FROM registros where DATE(horaSalida) =  CURDATE();`);
     return row;
 }
 

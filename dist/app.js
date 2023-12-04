@@ -294,7 +294,7 @@ SS.get(`/api/registros/consultarRegistrosHoy`, (req, res) => __awaiter(void 0, v
         res.status(200).json(body);
     }
     catch (a) {
-        console.log(`Algo salio mal con la consulta de multasd ${a}`);
+        console.log(`Algo salio mal con la consulta de registros ${a}`);
         res.status(400).json({ mensaje: `Algo salio mal con el registro ${a}` });
     }
 }));
@@ -353,6 +353,6 @@ SS.post("/api/registros/eliminarRegistro", (req, res) => __awaiter(void 0, void 
         res.status(400).json({ mensaje: `Algo salio mal ${a}` });
     }
 }));
-SS.listen(12345, () => {
+SS.listen(12346, () => {
     console.log("Server escuchando... $$");
 });

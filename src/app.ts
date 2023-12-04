@@ -338,7 +338,7 @@ SS.get(`/api/registros/consultarRegistrosHoy`,
         const body = await consRegistro();
         res.status(200).json(body);
     }catch(a){
-        console.log(`Algo salio mal con la consulta de multasd ${a}`);
+        console.log(`Algo salio mal con la consulta de registros ${a}`);
         res.status(400).json({mensaje:`Algo salio mal con el registro ${a}`})
 
     }
@@ -404,7 +404,7 @@ async (req: Request, res: Response) => {
     }
 });
 
-SS.listen(12345, () => {
+SS.listen(12346, () => {
     console.log("Server escuchando... $$");
 
 });

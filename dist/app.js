@@ -335,7 +335,7 @@ SS.post("/api/registros/actualizarRegistro", (req, res) => __awaiter(void 0, voi
 SS.post("/api/registros/actualizarSalidaRegistro", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const body = req.body;
     try {
-        yield (0, registros_1.updSalidaRegistro)(body.idUnidad, body.idUnidad);
+        yield (0, registros_1.updSalidaRegistro)(body.idUnidad, body.idUnidad2);
         res.status(200).json({ mensaje: "Registro salida actualizado correctamente" });
     }
     catch (a) {

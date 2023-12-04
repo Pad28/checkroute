@@ -385,7 +385,7 @@ SS.post("/api/registros/actualizarSalidaRegistro",
 async (req: Request, res: Response) => {
     const body = req.body;
     try{
-        await updSalidaRegistro(body.idUnidad, body.idUnidad);
+        await updSalidaRegistro(body.idUnidad, body.idUnidad2);
         res.status(200).json({mensaje: "Registro salida actualizado correctamente"})
     }catch(a){
         res.status(400).json({mensaje: `Algo salio mal ${a}`})

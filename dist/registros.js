@@ -37,7 +37,7 @@ const consAllRegistro = () => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.consAllRegistro = consAllRegistro;
 const consRegistro = () => __awaiter(void 0, void 0, void 0, function* () {
-    const [row] = yield empleados_1.pool.query(`SELECT idUnidad, DATE_FORMAT(horaSalida, '%H:%i') AS horaSalida, DATE_FORMAT(horaLlegada, '%H:%i') AS horaLlegada
+    const [row] = yield empleados_1.pool.query(`SELECT idregistros, idUnidad, DATE_FORMAT(horaSalida, '%H:%i') AS horaSalida, DATE_FORMAT(horaLlegada, '%H:%i') AS horaLlegada
     FROM registros where DATE(horaSalida) =  CURDATE();`);
     return row;
 });

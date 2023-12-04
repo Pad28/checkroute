@@ -298,3 +298,61 @@ SS.get(`/api/registros/consultarRegistrosHoy`, (req, res) => __awaiter(void 0, v
         res.status(400).json({ mensaje: `Algo salio mal con el registro ${a}` });
     }
 }));
+//Insertar Registro
+SS.post("/api/registros/insertarRegistro", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const body = req.body;
+    try {
+        yield (0, registros_1.newRegistro)(body.idUnidad);
+        res.status(200).json({ mensaje: "Registro ingresado correctamente" });
+    }
+    catch (a) {
+        res.status(400).json({ mensaje: `Algo salio mal ${a}` });
+    }
+}));
+//Insertar Registro
+SS.post("/api/registros/actualizarRegistro", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const body = req.body;
+    try {
+        yield (0, registros_1.updRegistro)(body.idUnidad);
+        res.status(200).json({ mensaje: "Registro actualizado correctamente" });
+    }
+    catch (a) {
+        res.status(400).json({ mensaje: `Algo salio mal ${a}` });
+    }
+}));
+//Actualizar Registro
+SS.post("/api/registros/actualizarRegistro", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const body = req.body;
+    try {
+        yield (0, registros_1.updRegistro)(body.idUnidad);
+        res.status(200).json({ mensaje: "Registro actualizado correctamente" });
+    }
+    catch (a) {
+        res.status(400).json({ mensaje: `Algo salio mal ${a}` });
+    }
+}));
+//Actualizar salida Registro
+SS.post("/api/registros/actualizarSalidaRegistro", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const body = req.body;
+    try {
+        yield (0, registros_1.updSalidaRegistro)(body.idUnidad, body.idUnidad);
+        res.status(200).json({ mensaje: "Registro salida actualizado correctamente" });
+    }
+    catch (a) {
+        res.status(400).json({ mensaje: `Algo salio mal ${a}` });
+    }
+}));
+//Eliminar Registro
+SS.post("/api/registros/eliminarRegistro", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const body = req.body;
+    try {
+        yield (0, registros_1.delRegistro)(body.idUnidad);
+        res.status(200).json({ mensaje: "Registro eliminado correctamente" });
+    }
+    catch (a) {
+        res.status(400).json({ mensaje: `Algo salio mal ${a}` });
+    }
+}));
+SS.listen(12345, () => {
+    console.log("Server escuchando... $$");
+});

@@ -8,7 +8,7 @@ import { valid } from "./middlewares/validar_campos";
 import { emitWarning } from "process";
 import { consChoferes, consUnidades, consultarIdUnidades, consultarUnidades, delUnidad, newUnidad, updUnidad } from "./unidades";
 import { consMultaPend, delMulta, newMulta, updMulta } from "./multas";
-import { consRegistro } from "./registros";
+import { consRegistro, delRegistro, newRegistro, updRegistro, updSalidaRegistro } from "./registros";
 const SS = express();
 SS.use(express.json());
 SS.use(cors());
@@ -343,3 +343,69 @@ SS.get(`/api/registros/consultarRegistrosHoy`,
 
     }
 });
+
+//Insertar Registro
+SS.post("/api/registros/insertarRegistro",
+async (req: Request, res: Response) => {
+    const body = req.body;
+    try{
+        await newRegistro(body.idUnidad);
+        res.status(200).json({mensaje: "Registro ingresado correctamente"})
+    }catch(a){
+        res.status(400).json({mensaje: `Algo salio mal ${a}`})
+    }
+});
+
+//Insertar Registro
+SS.post("/api/registros/actualizarRegistro",
+async (req: Request, res: Response) => {
+    const body = req.body;
+    try{
+        await updRegistro(body.idUnidad);
+        res.status(200).json({mensaje: "Registro actualizado correctamente"})
+    }catch(a){
+        res.status(400).json({mensaje: `Algo salio mal ${a}`})
+    }
+});
+
+//Actualizar Registro
+SS.post("/api/registros/actualizarRegistro",
+async (req: Request, res: Response) => {
+    const body = req.body;
+    try{
+        await updRegistro(body.idUnidad);
+        res.status(200).json({mensaje: "Registro actualizado correctamente"})
+    }catch(a){
+        res.status(400).json({mensaje: `Algo salio mal ${a}`})
+    }
+});
+
+//Actualizar salida Registro
+SS.post("/api/registros/actualizarSalidaRegistro",
+async (req: Request, res: Response) => {
+    const body = req.body;
+    try{
+        await updSalidaRegistro(body.idUnidad, body.idUnidad);
+        res.status(200).json({mensaje: "Registro salida actualizado correctamente"})
+    }catch(a){
+        res.status(400).json({mensaje: `Algo salio mal ${a}`})
+    }
+});
+
+//Eliminar Registro
+SS.post("/api/registros/eliminarRegistro",
+async (req: Request, res: Response) => {
+    const body = req.body;
+    try{
+        await delRegistro(body.idUnidad);
+        res.status(200).json({mensaje: "Registro eliminado correctamente"})
+    }catch(a){
+        res.status(400).json({mensaje: `Algo salio mal ${a}`})
+    }
+});
+
+SS.listen(12345, () => {
+    console.log("Server escuchando... $$");
+
+});
+

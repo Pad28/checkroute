@@ -8,6 +8,7 @@ import { valid } from "./middlewares/validar_campos";
 import { emitWarning } from "process";
 import { consChoferes, consUnidades, consultarIdUnidades, consultarUnidades, delUnidad, newUnidad, updUnidad } from "./unidades";
 import { consMultaPend, delMulta, newMulta, updMulta } from "./multas";
+import { consRegistro } from "./registros";
 const SS = express();
 SS.use(express.json());
 SS.use(cors());
@@ -327,4 +328,18 @@ SS.listen(12345, () => {
 
 });
 
+//###################---REGISTROS---########################
+//Consultar registros
 
+SS.get(`/api/registros/consultarRegistrosHoy`, 
+    async (req: Request, res: Response) => {
+
+    try{
+        const body = await consRegistro();
+        res.status(200).json(body);
+    }catch(a){
+        console.log(`Algo salio mal con la consulta de multasd ${a}`);
+        res.status(400).json({mensaje:`Algo salio mal con el registro ${a}`})
+
+    }
+});

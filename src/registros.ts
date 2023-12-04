@@ -26,6 +26,11 @@ export const consAllRegistro = async () => {
     return row;
 }
 
+export const consRegistro = async () => {
+    const [row] = await pool.query(`select idUnidad, horaSalida, horaLlegada from registros where DATE(horaSalida) =  CURDATE();`);
+    return row;
+}
+
 export const consDiaRegistro = async () => {
     const [row] = await pool.query(`SELECT * FROM registros WHERE DATE(horaSalida) =  CURDATE();`);
     return row;

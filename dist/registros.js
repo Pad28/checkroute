@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.consDiaRegistro = exports.consAllRegistro = exports.delRegistro = exports.updSalidaRegistro = exports.updRegistro = exports.newRegistro = void 0;
+exports.consDiaRegistro = exports.consRegistro = exports.consAllRegistro = exports.delRegistro = exports.updSalidaRegistro = exports.updRegistro = exports.newRegistro = void 0;
 const empleados_1 = require("./empleados");
 const newRegistro = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const row = yield empleados_1.pool.query(`call insertarRegistro (${id});`);
@@ -36,6 +36,11 @@ const consAllRegistro = () => __awaiter(void 0, void 0, void 0, function* () {
     return row;
 });
 exports.consAllRegistro = consAllRegistro;
+const consRegistro = () => __awaiter(void 0, void 0, void 0, function* () {
+    const [row] = yield empleados_1.pool.query(`select idUnidad, horaSalida, horaLlegada from registros where DATE(horaSalida) =  CURDATE();`);
+    return row;
+});
+exports.consRegistro = consRegistro;
 const consDiaRegistro = () => __awaiter(void 0, void 0, void 0, function* () {
     const [row] = yield empleados_1.pool.query(`SELECT * FROM registros WHERE DATE(horaSalida) =  CURDATE();`);
     return row;

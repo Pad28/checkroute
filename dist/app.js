@@ -21,6 +21,7 @@ const empleados_1 = require("./empleados");
 const validar_campos_1 = require("./middlewares/validar_campos");
 const unidades_1 = require("./unidades");
 const multas_1 = require("./multas");
+const registros_1 = require("./registros");
 const SS = (0, express_1.default)();
 SS.use(express_1.default.json());
 SS.use((0, cors_1.default)());
@@ -285,3 +286,15 @@ SS.post("/api/multas/eliminarMulta", (req, res) => __awaiter(void 0, void 0, voi
 SS.listen(12345, () => {
     console.log("Server escuchando... $$");
 });
+//###################---REGISTROS---########################
+//Consultar registros
+SS.get(`/api/registros/consultarRegistrosHoy`, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const body = yield (0, registros_1.consRegistro)();
+        res.status(200).json(body);
+    }
+    catch (a) {
+        console.log(`Algo salio mal con la consulta de multasd ${a}`);
+        res.status(400).json({ mensaje: `Algo salio mal con el registro ${a}` });
+    }
+}));

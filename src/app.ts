@@ -8,7 +8,7 @@ import { valid } from "./middlewares/validar_campos";
 import { emitWarning } from "process";
 import { consChoferes, consUnidades, consultarIdUnidades, consultarUnidades, delUnidad, newUnidad, updUnidad } from "./unidades";
 import { consMultaPend, delMulta, newMulta, updMulta } from "./multas";
-import { consRegistro, delRegistro, newRegistro, updRegistro, updSalidaRegistro } from "./registros";
+import { consHorariosChofer, consRegistro, delRegistro, newRegistro, updRegistro, updSalidaRegistro } from "./registros";
 const SS = express();
 SS.use(express.json());
 SS.use(cors());
@@ -401,6 +401,22 @@ async (req: Request, res: Response) => {
         res.status(200).json({mensaje: "Registro eliminado correctamente"})
     }catch(a){
         res.status(400).json({mensaje: `Algo salio mal ${a}`})
+    }
+});
+
+//###################---HORARIOS---########################
+//Consultar horarios por chofer
+
+SS.get(`/api/horarios/consultar`, 
+    async (req: Request, res: Response) => {
+        const app = req.body
+    try{
+        const body = await consHorariosChofer(app.chofer);
+        res.status(200).json(body);
+    }catch(a){
+        console.log(`Algo salio mal con la consulta de registros ${a}`);
+        res.status(400).json({mensaje:`Algo salio mal con el registro ${a}`})
+
     }
 });
 

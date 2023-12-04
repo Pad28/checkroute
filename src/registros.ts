@@ -37,3 +37,11 @@ export const consDiaRegistro = async () => {
     return row;
 }
 
+export const consHorariosChofer = async (chofer:string) => {
+    const [row] = await pool.query(`SELECT h.horaSalida, h.horaLlegada, h.ruta
+    FROM horarios h
+    JOIN unidades u ON h.unidad = u.idUnidad
+    WHERE u.usuario = '${chofer}' and DATE(h.fecha) =  CURDATE();`);
+    return row;
+}
+

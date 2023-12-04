@@ -353,6 +353,19 @@ SS.post("/api/registros/eliminarRegistro", (req, res) => __awaiter(void 0, void 
         res.status(400).json({ mensaje: `Algo salio mal ${a}` });
     }
 }));
+//###################---HORARIOS---########################
+//Consultar horarios por chofer
+SS.get(`/api/horarios/consultar`, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const app = req.body;
+    try {
+        const body = yield (0, registros_1.consHorariosChofer)(app.chofer);
+        res.status(200).json(body);
+    }
+    catch (a) {
+        console.log(`Algo salio mal con la consulta de registros ${a}`);
+        res.status(400).json({ mensaje: `Algo salio mal con el registro ${a}` });
+    }
+}));
 SS.listen(12346, () => {
     console.log("Server escuchando... $$");
 });

@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.consDiaRegistro = exports.consRegistro = exports.consAllRegistro = exports.delRegistro = exports.updSalidaRegistro = exports.updRegistro = exports.newRegistro = void 0;
+exports.consHorariosChofer = exports.consDiaRegistro = exports.consRegistro = exports.consAllRegistro = exports.delRegistro = exports.updSalidaRegistro = exports.updRegistro = exports.newRegistro = void 0;
 const empleados_1 = require("./empleados");
 const newRegistro = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const row = yield empleados_1.pool.query(`call insertarRegistro (${id});`);
@@ -47,3 +47,11 @@ const consDiaRegistro = () => __awaiter(void 0, void 0, void 0, function* () {
     return row;
 });
 exports.consDiaRegistro = consDiaRegistro;
+const consHorariosChofer = (chofer) => __awaiter(void 0, void 0, void 0, function* () {
+    const [row] = yield empleados_1.pool.query(`SELECT h.horaSalida, h.horaLlegada, h.ruta
+    FROM horarios h
+    JOIN unidades u ON h.unidad = u.idUnidad
+    WHERE u.usuario = '${chofer}' and DATE(h.fecha) =  CURDATE();`);
+    return row;
+});
+exports.consHorariosChofer = consHorariosChofer;

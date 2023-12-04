@@ -407,7 +407,7 @@ async (req: Request, res: Response) => {
 //###################---HORARIOS---########################
 //Consultar horarios por chofer
 
-SS.get(`/api/horarios/consultar`, 
+SS.post(`/api/horarios/consultar`, 
     async (req: Request, res: Response) => {
         const app = req.body
     try{

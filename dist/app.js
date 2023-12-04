@@ -355,7 +355,7 @@ SS.post("/api/registros/eliminarRegistro", (req, res) => __awaiter(void 0, void 
 }));
 //###################---HORARIOS---########################
 //Consultar horarios por chofer
-SS.get(`/api/horarios/consultar`, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+SS.post(`/api/horarios/consultar`, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const app = req.body;
     try {
         const body = yield (0, registros_1.consHorariosChofer)(app.chofer);

@@ -48,7 +48,7 @@ const consDiaRegistro = () => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.consDiaRegistro = consDiaRegistro;
 const consHorariosChofer = (chofer) => __awaiter(void 0, void 0, void 0, function* () {
-    const [row] = yield empleados_1.pool.query(`SELECT h.horaSalida, h.horaLlegada, h.ruta
+    const [row] = yield empleados_1.pool.query(`SELECT h.idhorarios, h.horaSalida, h.horaLlegada, h.ruta
     FROM horarios h
     JOIN unidades u ON h.unidad = u.idUnidad
     WHERE u.usuario = '${chofer}' and DATE(h.fecha) =  CURDATE();`);
